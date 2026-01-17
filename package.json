@@ -1,0 +1,128 @@
+{
+  "name": "auto-commit-splitter",
+  "displayName": "Auto Commit Splitter",
+  "description": "🤖 Intelligently split your Git changes into logical commits using AI. Analyze hunks, file operations, and generate conventional commit messages automatically. Supports multiple languages and AI models.",
+  "version": "1.0.0",
+  "publisher": "cemal-nadir",
+  "author": {
+    "name": "Cemal Nadir",
+    "email": "cemalnadirbusiness@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cemal-nadir/auto-commit-splitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cemal-nadir/auto-commit-splitter/issues"
+  },
+  "homepage": "https://github.com/cemal-nadir/auto-commit-splitter#readme",
+  "keywords": [
+    "git",
+    "commit",
+    "ai",
+    "automation",
+    "conventional-commits",
+    "productivity",
+    "developer-tools",
+    "source-control",
+    "workflow"
+  ],
+  "galleryBanner": {
+    "color": "#2d2d30",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/AI-Powered-blue",
+      "href": "https://github.com/cemal-nadir/auto-commit-splitter",
+      "description": "AI-Powered Git Commit Splitting"
+    },
+    {
+      "url": "https://img.shields.io/badge/i18n-Ready-green",
+      "href": "https://github.com/cemal-nadir/auto-commit-splitter",
+      "description": "Multi-language Support"
+    }
+  ],
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.108.1"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:autoCommitSplitter.splitAndCommit",
+    "onCommand:autoCommitSplitter.selectModel"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "autoCommitSplitter.selectModel",
+        "title": "%selectModel.title%",
+        "category": "%extension.category%"
+      },
+      {
+        "command": "autoCommitSplitter.splitAndCommit",
+        "title": "%splitAndCommit.title%",
+        "category": "%extension.category%"
+      }
+    ],
+    "configuration": {
+      "title": "%configuration.title%",
+      "properties": {
+        "autoCommitSplitter.autoApply": {
+          "type": "boolean",
+          "default": false,
+          "description": "%configuration.autoApply.description%"
+        },
+        "autoCommitSplitter.modelId": {
+          "type": "string",
+          "default": "",
+          "description": "%configuration.modelId.description%"
+        },
+         "autoCommitSplitter.includeUntracked": {
+          "type": "boolean",
+          "default": true,
+          "description": "%configuration.includeUntracked.description%"
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        { "command": "autoCommitSplitter.selectModel" },
+        { "command": "autoCommitSplitter.splitAndCommit" }
+      ],
+      "scm/title": [
+        {
+          "command": "autoCommitSplitter.splitAndCommit",
+          "when": "scmProvider == git",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.108.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.52.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "vscode-nls": "^5.2.0"
+  }
+}

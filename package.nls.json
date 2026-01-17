@@ -1,0 +1,10 @@
+{
+  "extension.category": "Git",
+  "selectModel.title": "Select Model",
+  "splitAndCommit.title": "Split and Commit",
+  "configuration.title": "Auto Commit Splitter",
+  "configuration.autoApply.description": "If true, applies the plan and creates commits without asking.",
+  "configuration.temperature.description": "LM temperature.",
+  "configuration.modelId.description": "Selected model id (persisted after 'Select Model').",
+  "configuration.includeUntracked.description": "Include untracked files as operations."
+}

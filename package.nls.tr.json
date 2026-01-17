@@ -1,0 +1,10 @@
+{
+  "extension.category": "Git",
+  "selectModel.title": "Model Seç",
+  "splitAndCommit.title": "Böl ve Commit Et",
+  "configuration.title": "Otomatik Commit Böl",
+  "configuration.autoApply.description": "Eğer true ise, planı onay istemeden uygular ve commit'leri oluşturur.",
+  "configuration.temperature.description": "Dil modeli sıcaklığı.",
+  "configuration.modelId.description": "Seçilen model id'si ('Model Seç' sonrası kalıcı olarak saklanır).",
+  "configuration.includeUntracked.description": "Takip edilmeyen dosyaları operasyon olarak dahil et."
+}
