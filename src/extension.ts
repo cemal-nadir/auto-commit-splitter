@@ -87,6 +87,9 @@ async function splitAndCommit(progress: vscode.Progress<{ message?: string }>, t
   progress.report({ message: localize('selectingModel', 'Selecting model…') });
   const model = await getOrPickModel();
   if (!model) {
+    vscode.window.showErrorMessage(
+      'No model available. Please run "Auto Commit Splitter: Select Model" first and ensure you have a language model provider installed (e.g., GitHub Copilot).'
+    );
     return;
   }
 
@@ -302,53 +305,94 @@ function extractBinaryOpsFromDiff(diff: string): FileOp[] {
 }
 
 async function selectModelInteractive() {
-  const models = await vscode.lm.selectChatModels({});
-  if (!models.length) {
+  try {
+    // Check if Language Model API is available
+    if (!vscode.lm) {
+      vscode.window.showErrorMessage(
+        'Language Model API is not available in this VS Code version. Please update to VS Code 1.90.0 or newer.'
+      );
+      return;
+    }
+
+    const models = await vscode.lm.selectChatModels({});
+    if (!models.length) {
+      vscode.window.showErrorMessage(
+        localize('noModels', 'No language models available. Install/enable a provider (e.g., GitHub Copilot Chat) and try again.')
+      );
+      return;
+    }
+
+    const items = models.map(m => ({
+      label: m.name ?? m.id,
+      description: `${m.vendor ?? ""} ${m.family ?? ""} ${m.version ?? ""}`.trim() || 'Language Model',
+      model: m
+    }));
+
+    const selected = await vscode.window.showQuickPick(items, {
+      title: localize('selectModelTitle', 'Select a model for Auto Commit Splitter'),
+      placeHolder: 'Choose a language model to analyze your commits'
+    });
+
+    if (!selected) {
+      return;
+    }
+
+    await vscode.workspace.getConfiguration(CFG_SECTION).update("modelId", selected.model.id, vscode.ConfigurationTarget.Global);
+    vscode.window.showInformationMessage(localize('selectedModel', 'Selected model: {0}', selected.label));
+  } catch (error) {
+    console.error('Error selecting model:', error);
     vscode.window.showErrorMessage(
-      localize('noModels', 'No language models available. Install/enable a provider (e.g., Copilot Chat) and try again.')
+      `Error selecting model: ${error instanceof Error ? error.message : String(error)}. Please ensure you have a language model provider installed (e.g., GitHub Copilot).`
     );
-    return;
   }
-
-  const items = models.map(m => ({
-    label: m.name ?? m.id,
-    description: `${m.vendor ?? ""} ${m.family ?? ""} ${m.version ?? ""}`.trim(),
-    model: m
-  }));
-
-  const selected = await vscode.window.showQuickPick(items, {
-    title: localize('selectModelTitle', 'Select a model for Auto Commit Splitter')
-  });
-
-  if (!selected) {
-    return;
-  }
-
-  await vscode.workspace.getConfiguration(CFG_SECTION).update("modelId", selected.model.id, vscode.ConfigurationTarget.Global);
-  vscode.window.showInformationMessage(localize('selectedModel', 'Selected model: {0}', selected.label));
 }
 
 async function getOrPickModel() {
-  const cfg = vscode.workspace.getConfiguration(CFG_SECTION);
-  const modelId = (cfg.get<string>("modelId") ?? "").trim();
-
-  // Language Model API: selectChatModels + sendRequest. Requires user consent in many providers. :contentReference[oaicite:2]{index=2}
-  const models = modelId
-    ? await vscode.lm.selectChatModels({ id: modelId })
-    : await vscode.lm.selectChatModels({});
-
-  if (!models.length) {
-    // fall back to interactive selection
-    await selectModelInteractive();
-    const modelId2 = (vscode.workspace.getConfiguration(CFG_SECTION).get<string>("modelId") ?? "").trim();
-    if (!modelId2) {
+  try {
+    if (!vscode.lm) {
+      vscode.window.showErrorMessage(
+        'Language Model API is not available in this VS Code version. Please update to VS Code 1.90.0 or newer.'
+      );
       return undefined;
     }
-    const models2 = await vscode.lm.selectChatModels({ id: modelId2 });
-    return models2[0];
-  }
 
-  return models[0];
+    const cfg = vscode.workspace.getConfiguration(CFG_SECTION);
+    const modelId = (cfg.get<string>("modelId") ?? "").trim();
+
+    // Try to get models - with proper error handling for user consent
+    let models: readonly vscode.LanguageModelChat[] = [];
+    try {
+      models = modelId
+        ? await vscode.lm.selectChatModels({ id: modelId })
+        : await vscode.lm.selectChatModels({});
+    } catch (error) {
+      console.warn('Error accessing language models, trying interactive selection:', error);
+    }
+
+    if (!models.length) {
+      // fall back to interactive selection
+      await selectModelInteractive();
+      const modelId2 = (vscode.workspace.getConfiguration(CFG_SECTION).get<string>("modelId") ?? "").trim();
+      if (!modelId2) {
+        return undefined;
+      }
+      try {
+        const models2 = await vscode.lm.selectChatModels({ id: modelId2 });
+        return models2[0];
+      } catch (error) {
+        console.error('Error getting model after selection:', error);
+        return undefined;
+      }
+    }
+
+    return models[0];
+  } catch (error) {
+    console.error('Error in getOrPickModel:', error);
+    vscode.window.showErrorMessage(
+      `Error accessing language model: ${error instanceof Error ? error.message : String(error)}`
+    );
+    return undefined;
+  }
 }
 
 async function generatePlan(

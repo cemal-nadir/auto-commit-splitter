@@ -11,12 +11,12 @@ suite('Extension Test Suite', () => {
     });
 
     test('Extension should be present', async () => {
-        const extension = vscode.extensions.getExtension('cemalnadir.auto-commit-splitter');
+        const extension = vscode.extensions.getExtension('cemal-nadir.auto-commit-splitter');
         assert.ok(extension);
     });
 
     test('Extension should activate', async () => {
-        const extension = vscode.extensions.getExtension('cemalnadir.auto-commit-splitter');
+        const extension = vscode.extensions.getExtension('cemal-nadir.auto-commit-splitter');
         if (extension && !extension.isActive) {
             await extension.activate();
         }
