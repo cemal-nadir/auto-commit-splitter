@@ -2,7 +2,7 @@
   "name": "auto-commit-splitter",
   "displayName": "Auto Commit Splitter",
   "description": "🤖 Intelligently split your Git changes into logical commits using AI. Analyze hunks, file operations, and generate conventional commit messages automatically. Supports multiple languages and AI models.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "cemal-nadir",
   "author": {
     "name": "Cemal Nadir",
@@ -46,60 +46,104 @@
   ],
   "icon": "icon.png",
   "engines": {
-    "vscode": "^1.108.1"
+    "vscode": "^1.90.0"
   },
   "categories": [
     "SCM Providers",
     "Other"
   ],
   "activationEvents": [
+    "onStartupFinished",
+    "onCommand:autoCommitSplitter.selectModel",
     "onCommand:autoCommitSplitter.splitAndCommit",
-    "onCommand:autoCommitSplitter.selectModel"
+    "onView:autoCommitSplitterView"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "autoCommitSplitter.selectModel",
-        "title": "%selectModel.title%",
-        "category": "%extension.category%"
+        "title": "Auto Commit Splitter: Select Model",
+        "icon": "$(gear)"
       },
       {
-        "command": "autoCommitSplitter.splitAndCommit",
-        "title": "%splitAndCommit.title%",
-        "category": "%extension.category%"
+        "command": "autoCommitSplitter.splitAndCommit", 
+        "title": "Auto Commit Splitter: Split and Commit",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "autoCommitSplitter.openPanel",
+        "title": "Open Auto Commit Splitter Panel",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "autoCommitSplitter.refreshPanel",
+        "title": "Refresh",
+        "icon": "$(refresh)"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "autoCommitSplitter",
+          "title": "Auto Commit Splitter",
+          "icon": "$(rocket)"
+        }
+      ]
+    },
+    "views": {
+      "autoCommitSplitter": [
+        {
+          "type": "webview",
+          "id": "autoCommitSplitterView",
+          "name": "Git Manager",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    },
     "configuration": {
-      "title": "%configuration.title%",
+      "title": "Auto Commit Splitter",
       "properties": {
         "autoCommitSplitter.autoApply": {
           "type": "boolean",
           "default": false,
-          "description": "%configuration.autoApply.description%"
+          "description": "Auto Apply"
         },
         "autoCommitSplitter.modelId": {
           "type": "string",
           "default": "",
-          "description": "%configuration.modelId.description%"
+          "description": "Selected AI model name (use 'Select Model' command to set)"
         },
          "autoCommitSplitter.includeUntracked": {
           "type": "boolean",
           "default": true,
-          "description": "%configuration.includeUntracked.description%"
+          "description": "Include untracked files"
         }
       }
     },
     "menus": {
       "commandPalette": [
         { "command": "autoCommitSplitter.selectModel" },
-        { "command": "autoCommitSplitter.splitAndCommit" }
+        { "command": "autoCommitSplitter.splitAndCommit" },
+        { "command": "autoCommitSplitter.openPanel" }
+      ],
+      "view/title": [
+        {
+          "command": "autoCommitSplitter.refreshPanel",
+          "when": "view == autoCommitSplitterView",
+          "group": "navigation"
+        }
       ],
       "scm/title": [
         {
+          "command": "autoCommitSplitter.selectModel",
+          "when": "scmProvider == git",
+          "group": "navigation@1"
+        },
+        {
           "command": "autoCommitSplitter.splitAndCommit",
           "when": "scmProvider == git",
-          "group": "navigation"
+          "group": "navigation@2"
         }
       ]
     }
@@ -113,7 +157,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.108.1",
+    "@types/vscode": "^1.90.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.52.0",
@@ -121,8 +165,5 @@
     "typescript": "^5.9.3",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2"
-  },
-  "dependencies": {
-    "vscode-nls": "^5.2.0"
   }
 }

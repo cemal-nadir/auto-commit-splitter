@@ -8,6 +8,13 @@ Intelligently split your Git changes into logical commits using AI. Analyze hunk
 
 ## ✨ Features
 
+### 🎨 **Modern Webview Interface** *(New in v1.1.0)*
+- **Professional Activity Bar Panel**: Dedicated, always-accessible interface in VS Code sidebar
+- **Real-time Git Status**: Live updates of branches, commits, and file changes
+- **Interactive Git Operations**: Stage, unstage, discard files with one-click actions
+- **Branch Management**: Create and switch branches directly from the UI
+- **Visual Commit Preview**: See exactly what commits will be created before execution
+
 ### 🤖 **AI-Powered Commit Splitting**
 - Automatically analyze your working directory changes
 - Split hunks and file operations into logical, reviewable commits
@@ -18,10 +25,11 @@ Intelligently split your Git changes into logical commits using AI. Analyze hunk
 - **File operations tracking**: Handle add, delete, rename, copy, and binary file changes
 - **Conflict detection**: Safely handle merge conflicts and staged changes
 
-### 🎯 **Developer Experience**
-- **Interactive preview**: Review the commit plan before applying
-- **Progress tracking**: Real-time feedback during processing
-- **Configurable behavior**: Customize auto-apply, model selection, and file inclusion
+### 🎯 **Enhanced Developer Experience**
+- **Responsive Design**: Adapts beautifully to any panel size
+- **Progress Tracking**: Real-time feedback with step-by-step progress indicators
+- **Professional UI**: Modern badge system, collapsible sections, hover effects
+- **Full Text Display**: No more truncated branch names or commit messages
 
 ### 🌍 **International Support**
 - **Multi-language**: Full support for English and Turkish
@@ -41,9 +49,9 @@ Intelligently split your Git changes into logical commits using AI. Analyze hunk
 2. Or use: `code --install-extension cemal.auto-commit-splitter`
 
 #### Option 2: Manual Installation (VSIX)
-1. Download the latest `auto-commit-splitter-1.0.0.vsix` from [GitHub Releases](https://github.com/cemal/auto-commit-splitter/releases)
+1. Download the latest `auto-commit-splitter-1.1.0.vsix` from [GitHub Releases](https://github.com/cemal/auto-commit-splitter/releases)
 2. In VS Code: `Extensions > Views and More Actions... > Install from VSIX...`
-3. Or via command line: `code --install-extension auto-commit-splitter-1.0.0.vsix`
+3. Or via command line: `code --install-extension auto-commit-splitter-1.1.0.vsix`
 
 ### Setup
 1. Open a Git repository in VS Code
