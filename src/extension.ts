@@ -378,7 +378,11 @@ class AutoCommitSplitterProvider implements vscode.WebviewViewProvider {
           }
           
           // Commit with retry logic
-          await this.runGitWithRetry(repoRoot, ['commit', '-m', commit.message]);
+          const commitArgs = ['commit', '-m', commit.message];
+          if (commit.body?.trim()) {
+            commitArgs.push('-m', commit.body.trim());
+          }
+          await this.runGitWithRetry(repoRoot, commitArgs);
         } catch (commitError) {
           const errorMessage = commitError instanceof Error ? commitError.message : String(commitError);
           
