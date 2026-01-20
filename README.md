@@ -45,13 +45,12 @@ Intelligently split your Git changes into logical commits using AI. Analyze hunk
 ### Installation
 
 #### Option 1: From Open VSX Registry
-1. Install from [Open VSX Registry](https://open-vsx.org/extension/cemal/auto-commit-splitter)
-2. Or use: `code --install-extension cemal.auto-commit-splitter`
+1. Install from [Vs Code Market Place](https://marketplace.visualstudio.com/items?itemName=cemal-nadir.auto-commit-splitter)
+2. Or use: `code --install-extension cemal-nadir.auto-commit-splitter`
 
 #### Option 2: Manual Installation (VSIX)
-1. Download the latest `auto-commit-splitter-1.1.0.vsix` from [GitHub Releases](https://github.com/cemal/auto-commit-splitter/releases)
+1. Download the latest `auto-commit-splitter-x.x.x.vsix` from [GitHub Releases](https://github.com/cemal-nadir/auto-commit-splitter/releases)
 2. In VS Code: `Extensions > Views and More Actions... > Install from VSIX...`
-3. Or via command line: `code --install-extension auto-commit-splitter-1.1.0.vsix`
 
 ### Setup
 1. Open a Git repository in VS Code
@@ -148,4 +147,4 @@ See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
 
 **Happy Coding!** 🎉 
 
-If you find this extension helpful, please consider leaving a review on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=cemalnadir.auto-commit-splitter).
+If you find this extension helpful, please consider leaving a review on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=cemal-nadir.auto-commit-splitter).

@@ -2,7 +2,7 @@
   "name": "auto-commit-splitter",
   "displayName": "Auto Commit Splitter",
   "description": "🤖 Intelligently split your Git changes into logical commits using AI. Analyze hunks, file operations, and generate conventional commit messages automatically. Supports multiple languages and AI models.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "cemal-nadir",
   "author": {
     "name": "Cemal Nadir",

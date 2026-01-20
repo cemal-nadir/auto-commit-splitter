@@ -5,6 +5,39 @@ All notable changes to the Auto Commit Splitter extension will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-01-20
+
+### 🎨 Professional Branding Update
+
+#### Added
+- **Professional Logo Design**: New custom SVG logo featuring Git branching with AI neural network elements
+- **Brand Consistency**: Logo used across extension icon, webview interface, and documentation
+- **Visual Identity**: Modern blue gradient background with white Git branches and green commit nodes
+- **AI Integration Symbol**: Subtle brain pattern and automation arrows showing AI-powered functionality
+
+#### Enhanced
+- **Extension Icon**: High-quality 128x128 PNG icon for VS Code marketplace
+- **Webview Logo**: Integrated logo in extension interface header
+- **Documentation**: Updated README with improved marketplace links and visual branding
+
+#### Technical
+- Logo available in both SVG (scalable) and PNG (marketplace compatible) formats
+- Optimized for different backgrounds and color schemes
+- Professional design suitable for marketplace presentation
+
+---
+
+## [1.1.1] - 2026-01-20
+
+### 🔧 Bug Fix - Commit Body Inclusion
+
+#### Fixed
+- **Commit Descriptions**: Fixed issue where AI-generated commit descriptions were ignored during execution
+- **Complete Commit Messages**: Both title and detailed description now properly included in final commits
+- **Preview Accuracy**: Execute commits functionality now matches exactly what's shown in preview
+
+---
+
 ## [1.1.0] - 2026-01-19
 
 ### 🎉 Major UI Overhaul - Complete Webview Integration

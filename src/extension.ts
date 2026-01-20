@@ -1139,7 +1139,34 @@ class AutoCommitSplitterProvider implements vscode.WebviewViewProvider {
     <div style="background-color: var(--vscode-editor-background); border: 1px solid var(--vscode-widget-border); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
         <!-- AI Model Section -->
         <div style="margin-bottom: 12px;">
-            <div style="font-weight: 600; font-size: 12px; margin-bottom: 8px; color: var(--vscode-titleBar-activeForeground);">
+            <div style="font-weight: 600; font-size: 12px; margin-bottom: 8px; color: var(--vscode-titleBar-activeForeground); display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 128 128" style="flex-shrink: 0;">
+                  <circle cx="64" cy="64" r="60" fill="url(#bgGradient)" stroke="url(#borderGradient)" stroke-width="2"/>
+                  <g transform="translate(64, 64)">
+                    <circle cx="0" cy="-8" r="4" fill="#ffffff"/>
+                    <line x1="0" y1="-25" x2="0" y2="-12" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                    <g stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" fill="none">
+                      <path d="M 0,-8 Q -12,0 -20,15" />
+                      <circle cx="-20" cy="15" r="3" fill="#4CAF50"/>
+                      <line x1="0" y1="-8" x2="0" y2="20"/>
+                      <circle cx="0" cy="20" r="3" fill="#4CAF50"/>
+                      <path d="M 0,-8 Q 12,0 20,15" />
+                      <circle cx="20" cy="15" r="3" fill="#4CAF50"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <radialGradient id="bgGradient" cx="0.3" cy="0.3">
+                      <stop offset="0%" stop-color="#1e3a8a"/>
+                      <stop offset="50%" stop-color="#1e40af"/>
+                      <stop offset="100%" stop-color="#1e293b"/>
+                    </radialGradient>
+                    <linearGradient id="borderGradient">
+                      <stop offset="0%" stop-color="#3b82f6"/>
+                      <stop offset="50%" stop-color="#8b5cf6"/>
+                      <stop offset="100%" stop-color="#06b6d4"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
                 🤖 AI Model: <span style="color: var(--vscode-descriptionForeground); font-weight: normal;" id="modelInfo">No model</span>
             </div>
             <div id="modelStatus" class="model-status">Loading...</div>
