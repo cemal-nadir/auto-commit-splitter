@@ -1,8 +1,8 @@
 # Auto Commit Splitter
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/cemalnadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemal.auto-commit-splitter)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/cemalnadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemal.auto-commit-splitter)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/cemalnadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemalnadir.auto-commit-splitter)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/cemal-nadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemal-nadir.auto-commit-splitter)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/cemal-nadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemal-nadir.auto-commit-splitter)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/cemal-nadir.auto-commit-splitter.svg)](https://marketplace.visualstudio.com/items?itemName=cemal-nadir.auto-commit-splitter)
 
 Intelligently split your Git changes into logical commits using AI. Analyze hunks, file operations, and generate conventional commit messages automatically.
 
